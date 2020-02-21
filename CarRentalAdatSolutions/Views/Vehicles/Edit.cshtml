@@ -1,0 +1,274 @@
+﻿@model CarRentalAdatSolutions.Models.Vehicle
+
+@{
+    ViewBag.Title = "Edit";
+
+
+    var imgSrc = "";
+    if (Model.Images.Count > 0)
+    {
+
+        var base64 = Convert.ToBase64String(Model.Images.First().ImagePath);
+        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
+    else
+    {
+        imgSrc = Model.ImageUrl;
+    }
+}
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" style="background:url(@imgSrc);background-repeat:no-repeat;background-size:cover" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <!-- Page Title Start -->
+            <div class="col-lg-12">
+                <div class="section-title  text-center">
+                    <h2>@Model.make-@Model.model</h2>
+                    <span class="title-line"><i class="fa fa-edit"></i></span>
+                </div>
+            </div>
+            <!-- Page Title End -->
+        </div>
+    </div>
+</section>
+
+}
+
+
+
+
+
+
+<!--== Page Title Area End ==-->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        @using (Html.BeginForm("Edit", "Vehicles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <h3 style="margin:10px">Basic information</h3>
+
+            <div class="row">
+                <div class=" col-md-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.make, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-md-12">
+                            <select class="form-control" name="make" id="make">
+                                <option>@Model.make</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.make, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.model, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.model, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.model, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.year, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.year, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.year, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FuelType, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-md-12">
+
+                            @Html.DropDownListFor(model => model.FuelType, new List<SelectListItem> {
+                            new SelectListItem { Text = "Petrol", Value = "Petrol"},
+                            new SelectListItem { Text = "Diesel", Value = "Disel"},
+                            new SelectListItem { Text = "CNG", Value = "CNG"}
+                            }, @Model.FuelType, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FuelType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 6 })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RegNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.RegNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RegNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RentalPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.RentalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RentalPrice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <hr />
+            <div class="container">
+                <h3 style="margin:10px">Vehicle Features</h3>
+
+                <div class="row" style="margin:10px;">
+
+                    <div class="col-md-4">
+
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.airCondition, new { htmlAttributes = new { @class = "form-check-input" } })
+
+                            @Html.ValidationMessageFor(model => model.airCondition, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.airCondition, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.PowerSteering, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.ValidationMessageFor(model => model.PowerSteering, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.PowerSteering, htmlAttributes: new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.CDPlayer, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.ValidationMessageFor(model => model.CDPlayer, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.CDPlayer, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.AirBag, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.ValidationMessageFor(model => model.AirBag, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.AirBag, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.BreakAssist, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.ValidationMessageFor(model => model.BreakAssist, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.BreakAssist, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <h3 style="margin:10px">Add vehicle image</h3>
+
+
+                @*Will allow user to change vehicle image*@
+                @*<div class="row" style="margin:10px;">
+
+
+                    <div class="col-md-4">
+                        <div class=" row">
+                            <div class="col-md-10 img-res">
+                                <label for="ImagePath">
+                                    <span>Image 1</span>
+                                    <input type="file" name="ImagePath" id="ImagePath" class="form-control" style="display:none" />
+                                    <img src="~/Content/img/default-inventory-image-car-med.jpg" class="img-fluid img-thumbnail" id="image1" />
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class=" row">
+                            <div class="col-md-10 img-res">
+                                <label for="ImagePath2">
+                                    <span>Image 2</span>
+                                    <input type="file" name="ImagePath2" id="ImagePath2" class="form-control" style="display:none" />
+                                    <img src="~/Content/img/default-inventory-image-car-med.jpg" class="img-fluid img-thumbnail" id="image2" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class=" row">
+                            <div class="col-md-10 img-res">
+                                <label for="ImagePath3">
+                                    <span>Image 3</span>
+                                    <input type="file" name="ImagePath3" id="ImagePath3" class="form-control" style="display:none" />
+                                    <img src="~/Content/img/default-inventory-image-car-med.jpg" class="img-fluid img-thumbnail" id="image3" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>*@
+
+                <button class="rent-btn btn" style="margin-left:30px" type="submit">Save changes</button>
+
+
+            </div>
+
+        }
+    </div>
+}
+
+@section scripts{
+
+
+    <script>
+
+                        $("#upload").click(function () {
+                            $("#ImagePath").click();
+                        });
+
+                        function readURL(input, img) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $(img).hide().fadeIn("slow").attr('src', e.target.result);
+                                }
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        $("#ImagePath").change(function () {
+
+                                readURL(this, "#image1");
+                        });
+                            $("#ImagePath2").change(function () {
+
+                                readURL(this, "#image2");
+                            });
+
+                            $("#ImagePath3").change(function () {
+
+                                readURL(this, "#image3");
+                            });
+
+
+                        $(document).ready(function () {
+
+
+                            fetch("../../brand.json")
+                                .then(function (resp) {
+                                    return resp.json();
+                                })
+                                .then(function (data) {
+                                    $.each(data, function () {
+                                        $("#make").append("<option>" + this.name + "</option>")
+                                    });
+                                });
+                        });
+    </script>
+
+
+}
+

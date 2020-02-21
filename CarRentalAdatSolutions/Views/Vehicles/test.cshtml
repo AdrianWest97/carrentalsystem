@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "test";
+}
+
+<br />
+<br />
+<h2>test</h2>
+
+<button type="button" onclick="showDialog()" class="btn btn-lg btn-primary">Show Dialog</button>
+
+<script>
+
+    function showDialog() {
+        Swal.fire({
+                        icon: 'success',
+                        title: "Booking success!",
+                        html: '<small>Car has been booked. An email has been sent you via email. You can view this booking on your <a href="/Bookings/">dashboard</a></small>',
+                        showConfirmButton: false,
+                    });
+    }
+    </script>
+    

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CarRentalAdatSolutions.Models.Booking>
+    @{
+        ViewBag.Title = "My Bookings";
+    }
+
+    <style>
+        .blocks .btn {
+            margin: 0 5px;
+            border-radius: 0;
+            border: 3px solid #ffffff;
+            padding: 5px;
+        }
+    </style>
+    <div class="container" style="  padding-top: 7.5rem;">
+        <div class="section-mybookings">
+            <div class="row">
+                @{
+                    if (Model != null)
+                    {
+                        if (Model.Count() > 0)
+                        {
+                            //display vehicles
+                            foreach (var item in Model)
+                            {
+                                var base64 = Convert.ToBase64String(item.vehicle.Images.First().ImagePath);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <div class="col-md-6">
+                                    <div class="card mb-5">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-7">
+                                            <img src="@imgSrc" class="img-fluid" alt="@item.vehicle.make - @item.vehicle.model" style="width:100%">
+                                           </div>
+                                            <div class="col-md-5">
+
+                                            <div class="card-body">
+                                                <div class="card-title" style="text-align:center;font-weight:bold">
+                                                    @item.vehicle.make - @item.vehicle.model &nbsp;
+                                                </div>
+                                     
+                                                <p class="card-text"> Booked on:&nbsp;@item.PickUpDate.ToString("MMM dd, yyyy")</p>
+                                                <p class="card-text"> Duration:&nbsp;@item.NumberOfDays days</p>
+                                                <p class="card-text"> TAX:&nbsp;<small style="color:darkred;font-weight:600">@string.Format("{0:C}", item.Reciept.TAX)</small></p>
+                                                <p class="card-text"> Total:&nbsp;<small style="color:darkred;font-weight:600">@string.Format("{0:C}", item.Reciept.TotalCharges)</small></p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+            <div class="jumbotron" style="padding-top:15em">
+                <h2>No rentals to display</h2><br />
+
+                <p>The Adat solution is a web app that deals with the entire process of renting a car and creates a hassle-free experience for both the customer and the car dealerships</p><br />
+                <div class="log-btn">
+                    <a href="/">
+                    <button type="button" class="btn btn-primary btn-lg" style="background-color:#ffd000">Go go home</button>
+                        </a>
+                    </div>
+            </div>
+                           
+                            
+                        }
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+

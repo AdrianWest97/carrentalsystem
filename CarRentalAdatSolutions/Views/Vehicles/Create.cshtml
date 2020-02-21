@@ -1,0 +1,252 @@
+﻿@model CarRentalAdatSolutions.Models.Vehicle
+
+@{
+    ViewBag.Title = "Add vehicle";
+}
+@ViewBag.Error
+
+<!--== Page Title Area End ==-->
+    <div class="container" style="padding:10px;padding-top:10em;">
+
+        @using (Html.BeginForm("Create", "Vehicles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+       
+                    <h3 style="margin:10px">Basic information</h3>
+          
+                    <div class="row">
+                        <div class=" col-md-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.make, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                <div class="col-md-12">
+                                    @Html.DropDownListFor(m => m.make,Enumerable.Empty<SelectListItem>(),
+                                   "Select vehicle brand", new {@class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.make, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.model, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                <div class="col-md-12">
+                                    <select class="form-control" name="model" id="model">
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.model, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.year, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.year, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.year, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Speed, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Speed, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Speed, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FuelType, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                <div class="col-md-12">
+
+                                 @Html.DropDownListFor(model => model.FuelType, new List<SelectListItem>(Enum.GetValues(typeof(FuelType))), "Select fuel type", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FuelType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control",@rows = 6})
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RegNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.RegNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RegNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RentalPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.RentalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RentalPrice, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="container">
+                        <h3 style="margin:10px">Vehicle Features</h3>
+
+                        <div class="row" style="margin:10px;">
+
+                            <div class="col-md-4">
+
+                                <div class="form-check">
+                                    @Html.EditorFor(model => model.airCondition, new { htmlAttributes = new { @class = "form-check-input" } })
+
+                                    @Html.ValidationMessageFor(model => model.airCondition, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.airCondition, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="form-check">
+                                    @Html.EditorFor(model => model.PowerSteering, new { htmlAttributes = new { @class = "form-check-input" } })
+                                    @Html.ValidationMessageFor(model => model.PowerSteering, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.PowerSteering, htmlAttributes: new { @class = "control-label" })
+                                </div>
+
+                                <div class="form-check">
+                                    @Html.EditorFor(model => model.CDPlayer, new { htmlAttributes = new { @class = "form-check-input" } })
+                                    @Html.ValidationMessageFor(model => model.CDPlayer, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.CDPlayer, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    @Html.EditorFor(model => model.AirBag, new { htmlAttributes = new { @class = "form-check-input" } })
+                                    @Html.ValidationMessageFor(model => model.AirBag, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.AirBag, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="form-check">
+                                    @Html.EditorFor(model => model.BreakAssist, new { htmlAttributes = new { @class = "form-check-input" } })
+                                    @Html.ValidationMessageFor(model => model.BreakAssist, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.BreakAssist, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <h3 style="margin:10px">Add vehicle image</h3>
+
+                        <div class="row" style="margin:10px;">
+                            <div class="col-md-4">
+                                <div class=" row">
+                                    <div class="col-md-12 img-res">
+                                       
+                                                <label for="ImagePath">
+                                                    <input type="file" name="ImagePath" id="ImagePath" class="form-control" style="display:none" />
+                                                    <img src="~/Content/img/default-inventory-image-car-med.jpg" class="img-fluid img-thumbnail" id="image1" />
+                                                    <span>Image 1</span>
+                                                </label>
+                                        </div>
+                                    </div>
+                                
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class=" row">
+                                    <div class="col-md-12 img-res">
+                                        <label for="ImagePath2">
+                                            <input type="file" name="ImagePath2" id="ImagePath2" class="form-control" style="display:none" />
+                                            <img src="~/Content/img/default-inventory-image-car-med.jpg" class="img-fluid img-thumbnail" id="image2" />
+                                            <span>Image 2</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class=" row">
+                                    <div class="col-md-12 img-res">
+                                        <label for="ImagePath3">
+                                            <input type="file" name="ImagePath3" id="ImagePath3" class="form-control" style="display:none" />
+                                            <img src="~/Content/img/default-inventory-image-car-med.jpg" class="img-fluid img-thumbnail" id="image3" />
+                                            <span>Image 3</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+             
+                    <button class="rent-btn btn" style="margin-left:30px" type="submit">create</button>
+                    }
+                </div>
+
+
+                @section scripts{
+                    
+
+                    <script>
+
+                        $("#upload").click(function () {
+                            $("#ImagePath").click();
+                        });
+
+                        function readURL(input, img) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $(img).hide().fadeIn("slow").attr('src', e.target.result);
+                                }
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        $("#ImagePath").change(function () {
+                                
+                                readURL(this, "#image1");
+                        });
+                            $("#ImagePath2").change(function () {
+                                
+                                readURL(this, "#image2");
+                            });
+
+                            $("#ImagePath3").change(function () {
+                                
+                                readURL(this, "#image3");
+                            });
+                        
+                        
+                        var jsonData;
+
+                        fetch("../../brand.json")
+                            .then(function (resp) {
+                                return resp.json();
+                            })
+                            .then(function (data) {
+                                jsonData = data;
+                                $.each(data, function (k, v) {
+                                    $("#make").append("<option>"+v.brand+"</option>");
+                                });
+                            });
+
+                        $("#make").on("change", function () {
+                            var value = $(this).val();
+                              $("#model").html("");
+                            $.each(jsonData, function (k, v) {
+                                if (v.brand == value) {
+                                    $.each(v.models, function (g, j) {
+
+                                      
+                                        $("#model").append("<option>" + j + "</option>");
+                                    });
+                                }
+                            });
+                        });
+                       
+
+      
+                    </script>
+
+
+                }

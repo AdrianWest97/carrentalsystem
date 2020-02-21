@@ -1,0 +1,381 @@
+﻿@model CarRentalAdatSolutions.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = @Model.user.FullName;
+}
+<style>
+    .border {
+        margin-bottom: 10px;
+    }
+
+    .main-secction {
+    }
+
+    .image-section {
+        padding: 0px;
+    }
+
+        .image-section img {
+            width: 100%;
+            height: 250px;
+            position: relative;
+        }
+
+    .user-image {
+        position: absolute;
+        margin-top: -50px;
+    }
+
+    .user-left-part {
+        margin: 0px;
+    }
+
+    .user-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .user-profil-part {
+        padding-bottom: 30px;
+        background-color: #FAFAFA;
+    }
+
+    .follow {
+        margin-top: 70px;
+    }
+
+    .user-detail-row {
+        margin: 0px;
+    }
+
+    .user-detail-section2 p {
+        font-size: 12px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .user-detail-section2 {
+        margin-top: 10px;
+    }
+
+        .user-detail-section2 span {
+            color: #7CBBC3;
+            font-size: 20px;
+        }
+
+        .user-detail-section2 small {
+            font-size: 12px;
+            color: #D3A86A;
+        }
+
+    .profile-right-section {
+        padding: 20px 0px 10px 15px;
+        background-color: #FFFFFF;
+    }
+
+    .profile-right-section-row {
+        margin: 0px;
+    }
+
+    .profile-header-section1 h1 {
+        font-size: 25px;
+        margin: 0px;
+    }
+
+    .profile-header-section1 h5 {
+        color: #0062cc;
+    }
+
+    .req-btn {
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .profile-tag {
+        padding: 10px;
+        border: 1px solid #F6F6F6;
+    }
+
+        .profile-tag p {
+            font-size: 12px;
+            color: black;
+        }
+
+        .profile-tag i {
+            color: #ADADAD;
+            font-size: 20px;
+        }
+
+    .image-right-part {
+        background-color: #FCFCFC;
+        margin: 0px;
+        padding: 5px;
+    }
+
+    .img-main-rightPart {
+        background-color: #FCFCFC;
+        margin-top: auto;
+    }
+
+    .image-right-detail {
+        padding: 0px;
+    }
+
+        .image-right-detail p {
+            font-size: 12px;
+        }
+
+        .image-right-detail a:hover {
+            text-decoration: none;
+        }
+
+    .image-right img {
+        width: 100%;
+    }
+
+    .image-right-detail-section2 {
+        margin: 0px;
+    }
+
+        .image-right-detail-section2 p {
+            color: #38ACDF;
+            margin: 0px;
+        }
+
+        .image-right-detail-section2 span {
+            color: #7F7F7F;
+        }
+
+    .nav-link {
+        font-size: 1.2em;
+    }
+</style>
+<div class="container main-secction">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 image-section">
+            <img src="~/Content/img/page-title.jpg">
+        </div>
+
+
+        <div class="row user-left-part">
+            <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
+                <div class="row ">
+                    <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
+                        @{
+                            if (Model.user.ProfilePhoto != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.user.ProfilePhoto);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <!--convert image-->
+                                <img src="@imgSrc" class="rounded-circle">
+
+                            }
+                            else
+                            {
+                                <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle">
+
+                            }
+                        }
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
+
+                        <button id="btn-contact" class="btn btn-success btn-block follow">Change profile photo</button>
+
+                    </div>
+                    <div class="row user-detail-row">
+                        <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
+                            <div class="border"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
+                <div class="row profile-right-section-row">
+                    <div class="col-md-12 profile-header">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
+                                <h1>@Model.user.FullName</h1>
+                                <h5>@Model.user.Email</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 text-right pull-rigth">
+                                <a href="/Account/Edit/@Model.user.Id" class="btn btn-primary btn-block">Update Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">Bookings</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#payment" role="tab" data-toggle="tab">Payment History</a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+
+                                    <div role="tabpanel" class="tab-pane fade show active" id="profile">
+                                        <div class="row">
+                                            <br />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>@Model.user.FullName</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>@Model.user.Email</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>@Model.user.PhoneNumber</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>About</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>@Model.user.About</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+
+                                            @{
+                                                if (Model.user.Address != null)
+                                                {
+                                                    <div class="col-md-2">
+                                                        <label>Address</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p>@Model.user.Address.StrLine1</p>
+                                                    </div>
+                                                }
+                                            }
+
+
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane fade" id="buzz">
+                                        <br />
+                                        @{
+                                            if (Model.Bookings.Count() > 0)
+                                            {
+                                                var imgSrc = "";
+                                                foreach (var item in Model.Bookings)
+                                                {
+                                                    if (item.vehicle.Images.Count() > 0)
+                                                    {
+                                                        var base64 = Convert.ToBase64String(item.vehicle.Images.First().ImagePath);
+
+                                                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                    }
+
+                                                    else
+                                                    {
+                                                        imgSrc = item.vehicle.ImageUrl;
+                                                    }
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="row no-gutters">
+                                                            <div class="col-md-3">
+                                                                <div class="p-car-thumbnails">
+                                                                    <a href="/Vehicles/Details/@item.Id">
+                                                                        <img src="@imgSrc" class="img-fluid" alt="@item.vehicle.make - @item.vehicle.model" style="width:100%">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-*">
+                                                                <div class="card-body">
+                                                                    <div class="card-title" style="text-align:center;font-weight:bold">
+
+                                                                        @item.vehicle.make - @item.vehicle.model
+
+                                                                    </div>
+                                                                    <p>Rented for @item.Reciept.TotalCharges</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div>
+                                                    <h3>No Bookings to display</h3>
+                                                </div>
+                                            }
+                                        }
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade show" id="payment">
+                                        @{
+                                            if (Model.Bookings != null)
+                                            {
+
+                                                foreach (var r in Model.Bookings)
+                                                {
+                                                    <li>@r.Reciept.TotalCharges</li>
+                                                }
+                                            }
+                                        }
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            @*<div class="col-md-4 img-main-rightPart">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row image-right-part">
+                                                <div class="col-md-6 pull-left image-right-detail">
+                                                    <h6>PUBLICIDAD</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="http://camaradecomerciozn.com/">
+                                            <div class="col-md-12 image-right">
+                                                <img src="http://pluspng.com/img-png/bootstrap-png-bootstrap-512.png">
+                                            </div>
+                                        </a>
+                                        <div class="col-md-12 image-right-detail-section2">
+
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

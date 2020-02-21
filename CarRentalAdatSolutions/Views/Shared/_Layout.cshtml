@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto:300,400&display=swap" rel="stylesheet">
+    
+    <title>@ViewBag.Title - ADAT CRS</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Css", required: false)
+</head>
+
+<body>
+    
+
+    <!--== Header Area Start ==-->
+    <header id="header-area" class="fixed-top">
+        <!--== Header Top Start ==-->
+        <div id="header-top" class="d-none d-xl-block">
+            <div class="container">
+               
+            </div>
+        </div>
+        <!--== Header Top End ==-->
+        <!--== Header Bottom Start ==-->
+        <div id="header-bottom">
+            <div class="container">
+                <div class="row">
+                    <!--== Logo Start ==-->
+                    <div class="col-lg-4">
+                        <a href="/" class="logo">
+                            <h4 style="color:#ffffff">ADAT CRS</h4>
+                        </a>
+                    </div>
+                    <!--== Logo End ==-->
+                    <!--== Main Menu Start ==-->
+                    <div class="col-lg-8 d-none d-xl-block">
+                        <nav class="mainmenu alignright">
+                            <ul>
+                                <li class="active">
+                                    <a href="/">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/About">About</a>
+                                   
+                                </li>
+
+                                @*<li><a href="/Home/Services">services</a></li>*@
+
+                                <li>
+                                    <a href="#">Vehicles</a>
+                                    <ul>
+                                        <li><a href="/vehicles/index">Vehicle List</a></li>
+                                        <li><a href="/vehicles/Dealers">Dealers</a></li>
+                                        @{
+                                            if (User.IsInRole("Dealer"))
+                                            {
+                                                <li><a href="/vehicles/Manage/">Manage Vehicles</a></li>
+
+                                            }
+                                        }
+                                      
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="#">Manage</a>
+                                    @Html.Partial("_LoginPartial")
+                                </li>
+
+                              
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--== Main Menu End ==-->
+                </div>
+            </div>
+        </div>
+        <!--== Header Bottom End ==-->
+    </header>
+    <!--== Header Area End ==-->
+
+
+
+    @RenderBody()
+    <hr />
+    <!--== Footer Area Start ==-->
+    <section id="footer-area">
+        <!-- Footer Widget Start -->
+        <div class="footer-widget-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Single Footer Widget Start -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-footer-widget">
+                            <h2>About Us</h2>
+                            <div class="widget-body">
+                                @*<img src="img/logo.png" alt="JSOFT">*@
+                                <h1 style="color:#ffd000">ADAT CRS</h1>
+                                <p>The Adat solution is a web app that deals with the entire process of renting a car and creates a hassle-free experience for both the customer and the car dealerships.</p>
+                                @*<div class="newsletter-area">
+                                    <form action="index.html">
+                                        <input type="email" placeholder="Subscribe Our Newsletter">
+                                        <button type="submit" class="newsletter-btn"><i class="fa fa-send"></i></button>
+                                    </form>
+                                </div>*@
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Footer Widget End -->
+                    <!-- Single Footer Widget Start -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-footer-widget">
+                            <h2>Services</h2>
+                            <div class="widget-body">
+                                <ul class="recent-post">
+                                    <li>
+                                        <a href="#">Variety of vehicles selection</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Road side assistance </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Key replacement</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">24-hour Customer Service</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Footer Widget End -->
+                    <!-- Single Footer Widget Start -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-footer-widget">
+                            <h2>get touch</h2>
+                            <div class="widget-body">
+                                <p>Have any question or queries, get in touch with us today.</p>
+
+                                <ul class="get-touch">
+                                    <li><i class="fa fa-map-marker"></i>NCU Road, Mandeville Manchster</li>
+                                    <li><i class="fa fa-mobile"></i> +876 337-2750</li>
+                                    <li><i class="fa fa-envelope"></i><a href="mailto:westsparta@gmail.com">westsparta@gmail.com</a></li>
+                                </ul>
+                                <a href="#" class="map-show" target="_blank">Show Location</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Footer Widget End -->
+                </div>
+            </div>
+        </div>
+   
+        <!-- Footer Bottom End -->
+    </section>
+    <!--== Footer Area End ==-->
+    
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
